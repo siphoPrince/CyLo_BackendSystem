@@ -32,7 +32,10 @@ namespace Cylo_Backend.Controllers
                 return NotFound();
             }
 
-            return Ok(profile);
+            // 📊 Calculate the counts from the Follows table
+            var followersCount = await _context.Follows.CountAsync(f => f.FollowingId == userId);
+            var followingCount = await _context.Follows.CountAsync(f => f.FollowerId == userId);
+            return Ok( new { profile, followersCount, followingCount });
         }
 
         // POST: api/Profile/save
@@ -69,6 +72,7 @@ namespace Cylo_Backend.Controllers
                 // Map values from the request to the existing database record
                 existingProfile.Name = incomingProfile.Name;
                 existingProfile.SurName = incomingProfile.SurName;
+                existingProfile.HandleName = incomingProfile.HandleName;
                 existingProfile.Bio = incomingProfile.Bio;
                 existingProfile.Phone = incomingProfile.Phone;
                 existingProfile.ImageUrl = incomingProfile.ImageUrl;

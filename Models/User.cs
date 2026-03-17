@@ -16,5 +16,10 @@ namespace Cylo_Backend.Models
         [JsonIgnore]
         public Profile? Profile { get; set; }
         public string? ProfilePicture { get; internal set; }
+
+       // follower and following
+        public ICollection<Follow> Followers { get; set; } = new List<Follow>();
+        public ICollection<Follow> Following { get; set; } = new List<Follow>();
+        public ICollection<Like> Likes { get; set; } = new List<Like>();
     }
 }

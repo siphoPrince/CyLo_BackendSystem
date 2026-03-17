@@ -32,6 +32,132 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Cylo_Backend.Controllers.CommentsController",
+    "Method": "PostComment",
+    "RelativePath": "api/Comments",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comment",
+        "Type": "Cylo_Backend.Models.Comments",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Cylo_Backend.Models.Comments",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.CommentsController",
+    "Method": "GetComment",
+    "RelativePath": "api/Comments/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Cylo_Backend.Models.Comments",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.CommentsController",
+    "Method": "GetCommentsByPost",
+    "RelativePath": "api/Comments/post/{postId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[Cylo_Backend.Models.Comments, Cylo_Backend, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.EscrowController",
+    "Method": "CreateOrder",
+    "RelativePath": "api/Escrow/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "order",
+        "Type": "Cylo_Backend.Models.Escrow_and_Payments.EscrowOrder",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.FollowController",
+    "Method": "ToggleFollow",
+    "RelativePath": "api/Follow/{targetUserId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "targetUserId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.LikesController",
+    "Method": "ToggleLike",
+    "RelativePath": "api/Likes/toggle/{postId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "postId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Cylo_Backend.Controllers.PostsController",
     "Method": "GetPosts",
     "RelativePath": "api/Posts",
@@ -70,6 +196,22 @@
   },
   {
     "ContainingType": "Cylo_Backend.Controllers.PostsController",
+    "Method": "GetPost",
+    "RelativePath": "api/Posts/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.PostsController",
     "Method": "UpdatePost",
     "RelativePath": "api/Posts/{id}",
     "HttpMethod": "PUT",
@@ -85,6 +227,32 @@
         "Name": "updatedPost",
         "Type": "Post",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Cylo_Backend.Controllers.PostsController",
+    "Method": "GetUserPosts",
+    "RelativePath": "api/Posts/user/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []

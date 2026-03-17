@@ -4,6 +4,7 @@ using Cylo_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cylo_Backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260314132653_getting user profile")]
+    partial class gettinguserprofile
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,119 +63,6 @@ namespace Cylo_Backend.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Cylo_Backend.Models.Comments", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Cylo_Backend.Models.Escrow_and_Payments.EscrowOrder", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("BuyerId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("LastUpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SellerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("EscrowOrders");
-                });
-
-            modelBuilder.Entity("Cylo_Backend.Models.Follow", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FollowerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FollowingId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FollowerId");
-
-                    b.HasIndex("FollowingId");
-
-                    b.ToTable("Follows");
-                });
-
-            modelBuilder.Entity("Cylo_Backend.Models.Like", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PostId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Likes");
-                });
-
             modelBuilder.Entity("Cylo_Backend.Models.Profile", b =>
                 {
                     b.Property<int>("Id")
@@ -182,9 +72,6 @@ namespace Cylo_Backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Bio")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HandleName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
@@ -259,9 +146,6 @@ namespace Cylo_Backend.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int>("LikeCount")
-                        .HasColumnType("int");
-
                     b.Property<string>("MediaUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -287,44 +171,6 @@ namespace Cylo_Backend.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Cylo_Backend.Models.Follow", b =>
-                {
-                    b.HasOne("Cylo_Backend.Models.User", "Follower")
-                        .WithMany("Following")
-                        .HasForeignKey("FollowerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Cylo_Backend.Models.User", "Following")
-                        .WithMany("Followers")
-                        .HasForeignKey("FollowingId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Follower");
-
-                    b.Navigation("Following");
-                });
-
-            modelBuilder.Entity("Cylo_Backend.Models.Like", b =>
-                {
-                    b.HasOne("Post", "Post")
-                        .WithMany("Likes")
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Cylo_Backend.Models.User", "User")
-                        .WithMany("Likes")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Post");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cylo_Backend.Models.Profile", b =>
@@ -364,18 +210,7 @@ namespace Cylo_Backend.Migrations
 
             modelBuilder.Entity("Cylo_Backend.Models.User", b =>
                 {
-                    b.Navigation("Followers");
-
-                    b.Navigation("Following");
-
-                    b.Navigation("Likes");
-
                     b.Navigation("Profile");
-                });
-
-            modelBuilder.Entity("Post", b =>
-                {
-                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

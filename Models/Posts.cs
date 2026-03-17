@@ -10,6 +10,7 @@ public class Post
 
     [Required]
     public int UserId { get; set; }
+   
 
     [Required]
     public int CategoryId { get; set; }
@@ -32,10 +33,13 @@ public class Post
 
     
     public string? MediaUrl { get; set; }
+    public int LikeCount { get; set; } = 0;
 
     [JsonIgnore]
     public virtual User? User { get; set; }
 
     [JsonIgnore]
     public virtual Category? Category { get; set; }
+    [JsonIgnore]
+    public virtual ICollection<Like> Likes { get; set; } = new List<Like>();
 }

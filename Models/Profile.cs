@@ -9,6 +9,7 @@ namespace Cylo_Backend.Models
         public int UserId { get; set; }
         [JsonIgnore]
         public User? User { get; set; }
+        public string? HandleName { get; set; }
         [Required]
         public string? Name { get; set; }
         public string? Bio {  get; set; }
